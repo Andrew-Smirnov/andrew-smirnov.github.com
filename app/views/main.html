@@ -1,0 +1,32 @@
+<form class="form-wrapper cf" ng-submit="sendRequest()">
+  <input type="text"  placeholder="I want to find..." ng-model="query">
+  IN
+  <div id="searchButton">
+    <input id="input2" type="text" ng-model="location">
+    <button type="submit">Search</button>
+  </div>
+</form>
+<div class="container">
+  <div class="row" >
+    <div class="col-sm-6 col-md-4" ng-repeat="venue in venues">
+      <div class="thumbnail">
+       <h4>{{venue.venue.name}}</h4>
+        <img ng-src="{{venue.imageUrl}}" alt="...">
+        <div class="caption">
+          <h5>{{venue.venue.location.formattedAddress[0] | addressFilter}}</h5>
+          <p>Category: {{venue.venue.categories[0].name}}</p>
+          <p>
+            <span class="label" ng-init="status = venue.venue.hours.isOpen ? 'OPEN NOW' : 'Close'"
+              ng-class="{'label-success':venue.venue.hours.isOpen, 'label-warning': !venue.venue.hours.isOpen}">
+              {{status}}
+            </span>
+          </p>
+        </div>
+        <div id="bottom">
+          <h5>{{venue.venue.rating | ratingFilter}}</h5>
+          <a href="#/venue/{{venue.venue.id}}" class="btn btn-primary" role="button">View more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
